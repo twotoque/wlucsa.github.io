@@ -4,11 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { locations } from './locations'; 
 
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import markerIcon from './assets/pin.svg';
 const DefaultIcon = L.icon({ 
   iconUrl: markerIcon, 
-  shadowUrl: markerShadow, 
   iconSize: [25, 41], 
   iconAnchor: [12, 41] 
 });
@@ -24,34 +22,15 @@ const App: React.FC = () => {
   );
 
     const eventImages = [
-    '/events/night-market-1.jpg',
-    '/events/matcha-night-1.jpg',
-    '/events/night-market-2.jpg',
-    '/events/social-1.jpg',
-    '/events/matcha-night-2.jpg',
-    '/events/night-market-3.jpg',
+    '/events/1.jpg',
+    '/events/2.jpg',
+    '/events/3.jpg',
+    '/events/4.jpg',
+    '/events/5.jpg',
+    '/events/6.jpg',
   ];
 
   
-  React.useEffect(() => {
-    const verifyIntegrity = () => {
-      const footer = document.getElementById('developer-credit');
-      const creditText = footer?.innerText.toLowerCase();
-      
-      if (!footer || !creditText?.includes('derek song')) {
-        document.body.innerHTML = `
-          <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] px-2 md:p-10">
-        <h1>Please add the footer back with developer credits to resume service.</h1>
-          </div>
-        `;
-      }
-    };
-
-    verifyIntegrity();
-    const interval = setInterval(verifyIntegrity, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
 
     <>
@@ -198,15 +177,22 @@ const App: React.FC = () => {
       Prepare for the school year with the WLUCSA Membership Card! Enjoy exclusive discounts at local Waterloo businesses and save while supporting the community.
     </p>
     <p className="!text-white text-xs md:text-sm opacity-90 italic">
-      Purchase during WLUCSA events or boothing. <b>2025-26 cards valid only from September 2025 to April 2026.</b>
+      Purchase during WLUCSA events or boothing. <br/><b>2025-26 cards valid only from September 2025 to April 2026.</b>
     </p>
+
+  {/* Email Button */}
+  <a 
+    href="mailto:csa.laurier@gmail.com"
+    className=" w-full md:w-[60%] mt-3 flex items-center gap-2 px-6 py-3 bg-white text-[#60918E] font-bold rounded-lg hover:bg-[#f8f9fa] transition-colors shadow-lg"
+  >
+    <i className="fas !text-[#60918E]  fa-envelope text-xl"></i>
+    <span className='!text-[#60918E] '>Want to partner with us?</span>
+  </a>
   </div>
 
   {/* 2. Cards Container: Responsive positioning */}
   <div className="
-    /* Mobile: Positioned relatively in the flex flow so it pushes text down */
     relative mt-12 mb-8 
-    /* Desktop: Switch to absolute positioning to float on the right */
     md:absolute md:mt-0 md:mb-0 md:-top-16 md:-right-4 lg:right-10 
     flex shrink-0
   ">
@@ -234,7 +220,7 @@ const App: React.FC = () => {
         {/* Header Image */}
         <div className="w-full h-80 md:h-120 overflow-hidden">
           <img 
-            src="/events/pic1.jpg" 
+            src="/events/header.jpg" 
             alt="CSA Events" 
             className="w-full h-full object-cover"
           />
@@ -250,30 +236,30 @@ const App: React.FC = () => {
           </p>
 
           {/* Social Links */}
-          <div className="flex flex-row justify-center gap-4 mb-10">
-            <a 
-              href="https://discord.gg/your-invite" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-[#5865F2] text-white font-bold rounded-lg hover:bg-[#4752C4] transition-colors shadow-lg"
-            >
-              Discord
-            </a>
-            <a 
-              href="https://instagram.com/wlucsa" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="px-6 py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
-            >
-              Instagram
-            </a>
-            <a 
-              href="mailto:csa@wlu.ca"
-              className="px-6 py-3 bg-[#60918E] text-white font-bold rounded-lg hover:bg-[#4a736f] transition-colors shadow-lg"
-            >
-              Email
-            </a>
-          </div>
+          <div className="flex flex-wrap justify-center gap-4 mb-10">
+            
+ 
+
+  {/* Instagram Button */}
+  <a 
+    href="https://instagram.com/wlucsa" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 px-6 py-3 bg-[#60918E] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
+  >
+    <i className="fab !text-white fa-instagram text-xl"></i>
+    <span className='!text-white '>Instagram</span>
+  </a>
+
+  {/* Email Button */}
+  <a 
+    href="mailto:csa.laurier@gmail.com"
+    className="flex items-center gap-2 px-6 py-3 bg-[#60918E] text-white font-bold rounded-lg hover:bg-[#4a736f] transition-colors shadow-lg"
+  >
+    <i className="fas !text-white  fa-envelope text-xl"></i>
+    <span className='!text-white '>Email</span>
+  </a>
+</div>
 
           {/* Event Images Gallery */}
           <div className="flex flex-wrap gap-4 justify-center">
@@ -294,6 +280,8 @@ const App: React.FC = () => {
       </div>
   
     </div>
+    
+    {/* Removal of this footer with credit violates terms of use */}
         <footer id="developer-credit" className="w-full bg-[#212121] py-8">
   <div className="max-w-7xl mx-auto px-4 flex justify-center items-center">
     <p className="text-gray-400 text-sm">
