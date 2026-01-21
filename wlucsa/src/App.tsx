@@ -59,7 +59,7 @@ const App: React.FC = () => {
             placeholder="Search locations..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg shadow-lg border-2 border-[#60918E]/30 focus:border-[#60918E] focus:outline-none bg-white/95 backdrop-blur-sm"
+            className="!text-[#61918e] w-full px-4 py-2 rounded-lg shadow-lg border-2 border-[#60918E]/30 focus:border-[#60918E] focus:outline-none bg-white/95 backdrop-blur-sm"
           />
         </div>
         <MapContainer center={[43.473, -80.535]} zoom={15} style={{ height: '100%', width: '100%' }}>
