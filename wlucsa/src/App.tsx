@@ -34,7 +34,7 @@ const App: React.FC = () => {
   return (
 
     <>
-    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] px-2 md:p-10">
+    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#366868_0%,#619190_100%)] px-2 md:p-10">
 <div className='pt-7 md:pt-10 flex flex-col items-center text-center mb-4 px-4'>
   <img 
     src="/wlucsa logo.svg" 
