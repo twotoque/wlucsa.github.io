@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "title": "BB.Q CHICKEN",
+    "logo": "",
+    "discount": "10% OFF",
+    "discountNote": "*Discount only applies for dine-in.",
+    "coordinates": [43.4723, -80.5365],
+    "address": "140 University Ave W A1, Waterloo, ON N2L 6J3",
+    "about": "bb.q Chicken serves Korean-style fried chicken known for its crispy texture and bold flavours.",
+    "csaRec": "Soy Garlic Chicken"
+  },
+  {
+    "id": 2,
+    "title": "NOW TEA",
+    "logo": "",
+    "discount": "10% OFF",
+    "discountNote": "",
+    "coordinates": [43.4761, -80.5311],
+    "address": "280 Lester St #106, Waterloo, ON N2L 3W5",
+    "about": "NowTea offers authentic Taiwanese bubble tea made with high-quality ingredients and fresh fruits.",
+    "csaRec": "Now Tea Duo, 50% sugar, 50% ice"
+  }
+]
