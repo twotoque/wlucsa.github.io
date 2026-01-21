@@ -42,19 +42,18 @@ const App: React.FC = () => {
     className="w-20 md:w-32 pb-5" 
   />
   
-  <h2 className="!text-white text-xs md:text-lg tracking-wide">
+  <h2 className="!text-white tracking-wide">
     WILFRID LAURIER UNIVERSITY CHINESE STUDENT ASSOCIATION
   </h2>
-  
-  <h1 className="!text-white text-2xl md:text-4xl font-bold">
-    MEMBERSHIP CARD
-  </h1>
+  <h1 className="!text-white !text-[2rem] md:!text-[3rem] font-bold">
+  MEMBERSHIP CARD
+</h1>
 </div>
 
 <div className='flex flex-col md:flex-row'>
      
       <div className="w-full md:w-2/3 h-[40vh] md:h-[80vh] rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden shadow-2xl border-b-4 md:border-b-0 md:border-r-4 border-[#60918E]/30 relative">
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1000] w-11/12 md:w-3/4">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1000] w-9/12 md:w-3/4">
           <input
             type="text"
             placeholder="Search locations..."
@@ -75,10 +74,23 @@ const App: React.FC = () => {
               eventHandlers={{ click: () => setSelected(loc) }}
             >
               <Popup className="custom-popup">
-                <div className="text-center p-1">
+                <div className="flex flex-col gap-1 stext-center p-1">
                   {loc.logo && <img src={loc.logo} alt="logo" className="w-12 h-12 mx-auto mb-2 rounded-full border border-gray-200" />}
-                  <h3 className="font-bold text-[#60918E] uppercase leading-tight">{loc.title}</h3>
-                  <p className="text-[10px] text-gray-500 mt-1">{loc.address}</p>
+                  <span className="font-bold text-lg text-center !text-[#60918E] uppercase leading-tight">{loc.title}</span>
+                  <span className="text-[10px] mb-1 text-center !text-gray-500 mt-1">{loc.address}</span>
+       <a 
+  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.title + ' ' + selected.address)}`}
+  target="_blank" 
+  rel="noopener noreferrer"
+  className="px-4 py-2 !bg-[#61918e] text-white text-xs font-bold rounded-lg hover:bg-[#4a736f] transition-colors shadow-md flex items-center justify-center gap-2"
+>
+  <span className='!text-white'>Open in Maps</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+    <polyline points="15 3 21 3 21 9"></polyline>
+    <line x1="10" y1="14" x2="21" y2="3"></line>
+  </svg>
+</a>
                 </div>
               </Popup>
             </Marker>
@@ -87,11 +99,11 @@ const App: React.FC = () => {
       </div>
 
       {/* 2. SIDE VIEW */}
-      <div className="w-full md:w-1/3 h-auto md:h-[80vh] bg-white/95 backdrop-blur-md p-6 rounded-b-xl md:rounded-r-xl md:rounded-bl-none shadow-2xl flex flex-col justify-between border-r-8 border-b-8 border-[#E9C46A]/40 overflow-y-auto">
+      <div className="w-full md:w-1/3 h-auto md:h-[80vh] bg-white/95 backdrop-blur-md p-6 rounded-b-xl md:rounded-r-xl md:rounded-bl-none shadow-2xl flex flex-col justify-between border-r-8 border-b-8 border-[#dfa01d]/40 overflow-y-auto">
         
         <div className="space-y-6">
 <div className="border-4 border-[#60918E] p-3 text-center flex items-center justify-center min-h-[80px]">
-  <h1 className="text-base md:text-xl font-black tracking-widest text-[#60918E] uppercase break-words overflow-hidden">
+  <h1 className=" font-black tracking-widest text-[#60918E] uppercase break-words overflow-hidden">
     {selected.title}
   </h1>
 </div>
@@ -118,7 +130,7 @@ const App: React.FC = () => {
 
             <div className="flex justify-between items-center pt-2">
               <span className="font-bold uppercase opacity-60 text-[10px]">CSA's Rec:</span>
-              <span className="font-black border-b-2 border-[#E9C46A]">{selected.csaRec}</span>
+              <span className="font-black border-b-2 border-[#dfa01d]">{selected.csaRec}</span>
             </div>
           </div>
         </div>
@@ -142,7 +154,7 @@ const App: React.FC = () => {
       </div>
 
       {/* LOCATIONS TABLE */}
-      <div className="w-full mt-6 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
+      <div className="w-full mt-6 mb-3 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-[#60918E] text-white">
@@ -161,7 +173,7 @@ const App: React.FC = () => {
                 >
                   <td className="px-4 py-3 text-sm font-semibold text-[#60918E]">{loc.title}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{loc.address}</td>
-                  <td className="px-4 py-3 text-sm font-bold text-[#E9C46A]">{loc.discount}</td>
+                  <td className="px-4 py-3 text-sm font-bold text-[#dfa01d]">{loc.discount}</td>
                 </tr>
               ))}
             </tbody>
@@ -174,10 +186,11 @@ const App: React.FC = () => {
     </div>
 
 
-    <div className="mt-10 relative bg-[#61918e] p-8 md:p-16 min-h-[250px] flex flex-col md:flex-row items-center overflow-hidden md:overflow-visible border-4 border-[#ccdbdb]/60 rounded-xl ">
+    <div className="mt-13 relative bg-[#61918e] p-8 md:p-16 min-h-[250px] flex flex-col md:flex-row items-center overflow-hidden md:overflow-visible border-4 border-[#ccdbdb]/60 rounded-xl ">
   
   <div className='flex flex-col z-20 md:w-3/5 lg:w-1/2'>
-    <h2 className="font-medium !text-white uppercase tracking-wide text-sm">
+  
+    <h2 className="font-medium !text-white/80 uppercase tracking-wide text-sm">
       Save and Support Local! Membership Card Costs:
     </h2>
     <h1 className="text-4xl md:text-6xl font-black !text-white my-2">
@@ -228,7 +241,7 @@ const App: React.FC = () => {
 
 <SavingsCalculator/>
       {/* MORE THAN JUST A CLUB SECTION */}
-      <div className="w-full mt-6 bg-white/95 backdrop-blur-md border-4 border-[#ccdbdb]/60 rounded-xl  shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
+      <div className="w-full mt-13 bg-white/95 backdrop-blur-md border-4 border-[#ccdbdb]/60 rounded-xl  shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
         {/* Header Image */}
         <div className="w-full h-80 md:h-120 overflow-hidden">
           <img 

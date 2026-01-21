@@ -76,5 +76,27 @@ export const locations: Location[] = [
     address: "308 King St N Unit 107-108, Waterloo, ON N2J 0G4",
     about: "Egg Club serves up fluffy egg sandwiches stacked on soft Japanese milk bread, with creative fillings from classic bacon and cheese to lobster bowls.",
     csaRec: "The Classic"
-  }
+  },
+  {
+    id: 7,
+    title: "FOODIE FRUITIE",
+    logo: "",
+    discount: "10% OFF", 
+    discountNote: "",
+    coordinates: [43.4751, -80.5305],
+    address: "203 Lester St #7, Waterloo, ON N2L 0B5",
+    about: "Foodie Fruitie is a vibrant Asian fusion café with a large variety of quality dishes, from a quick lunch to a filling dinner. Their menu includes skewers, ramen, sushi, rice sets, noodles, bubble tea, unique drinks, and more.",
+    csaRec: "Crispy Fried Curry Chicken with Rice"
+  },
+  {
+    id: 8,
+    title: "SWEET DREAMS TEASHOP",
+    logo: "",
+    discount: "10% OFF", 
+    discountNote: "",
+    coordinates: [43.4761, -80.5311],
+    address: "280 Lester St #106, Waterloo, ON N2L 3W5", 
+    about: "Sweet Dreams Teashop is Waterloo's original bubble tea shop with quality drinks, desserts, sandwiches, and boardgames.", 
+    csaRec: "Taro Milk Tea",
+  },
 ];
