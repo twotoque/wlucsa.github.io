@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { locations } from './locations'; 
-
+import SavingsCalculator from './Calculator';
 import markerIcon from './assets/pin.svg';
 const DefaultIcon = L.icon({ 
   iconUrl: markerIcon, 
@@ -174,7 +174,7 @@ const App: React.FC = () => {
     </div>
 
 
-    <div className="mt-10 relative bg-[#61918e] rounded-[40px] p-8 md:p-16 min-h-[250px] flex flex-col md:flex-row items-center overflow-hidden md:overflow-visible">
+    <div className="mt-10 relative bg-[#61918e] p-8 md:p-16 min-h-[250px] flex flex-col md:flex-row items-center overflow-hidden md:overflow-visible border-4 border-[#ccdbdb]/60 rounded-xl ">
   
   <div className='flex flex-col z-20 md:w-3/5 lg:w-1/2'>
     <h2 className="font-medium !text-white uppercase tracking-wide text-sm">
@@ -225,8 +225,10 @@ const App: React.FC = () => {
     />
   </div>
 </div>
+
+<SavingsCalculator/>
       {/* MORE THAN JUST A CLUB SECTION */}
-      <div className="w-full mt-6 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
+      <div className="w-full mt-6 bg-white/95 backdrop-blur-md border-4 border-[#ccdbdb]/60 rounded-xl  shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
         {/* Header Image */}
         <div className="w-full h-80 md:h-120 overflow-hidden">
           <img 
