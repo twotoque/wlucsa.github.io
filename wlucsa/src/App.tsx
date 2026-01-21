@@ -35,14 +35,23 @@ const App: React.FC = () => {
 
     <>
     <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] px-2 md:p-10">
-      
-     <div className='md:pt-10  flex flex-col items-center mb-4'>
-      <img src="/wlucsa logo.svg" alt="WLU CSA Logo" className="self-center pb-5" />
-     <h2 className="!text-white">WILFRID LAURIER UNIVERSITY CHINESE STUDENT ASSOCIATION</h2>
-     <h1  className="!text-white">MEMBERSHIP CARD</h1>
-     </div>
-      <div className='flex flex-col md:flex-row'>
-     
+<div className='pt-7 md:pt-10 flex flex-col items-center text-center mb-4 px-4'>
+  <img 
+    src="/wlucsa logo.svg" 
+    alt="WLU CSA Logo" 
+    className="w-20 md:w-32 pb-5" 
+  />
+  
+  <h2 className="!text-white text-xs md:text-lg tracking-wide">
+    WILFRID LAURIER UNIVERSITY CHINESE STUDENT ASSOCIATION
+  </h2>
+  
+  <h1 className="!text-white text-2xl md:text-4xl font-bold">
+    MEMBERSHIP CARD
+  </h1>
+</div>
+
+<div className='flex flex-col md:flex-row'>
      
       <div className="w-full md:w-2/3 h-[40vh] md:h-[80vh] rounded-t-xl md:rounded-l-xl md:rounded-tr-none overflow-hidden shadow-2xl border-b-4 md:border-b-0 md:border-r-4 border-[#60918E]/30 relative">
         <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-[1000] w-11/12 md:w-3/4">
@@ -81,11 +90,12 @@ const App: React.FC = () => {
       <div className="w-full md:w-1/3 h-auto md:h-[80vh] bg-white/95 backdrop-blur-md p-6 rounded-b-xl md:rounded-r-xl md:rounded-bl-none shadow-2xl flex flex-col justify-between border-r-8 border-b-8 border-[#E9C46A]/40 overflow-y-auto">
         
         <div className="space-y-6">
-  <div className="border-4 border-[#60918E] p-3 text-center flex items-center justify-center min-h-[80px]">
-  <h1 className="text-xl font-black tracking-widest text-[#60918E] uppercase break-words overflow-hidden">
+<div className="border-4 border-[#60918E] p-3 text-center flex items-center justify-center min-h-[80px]">
+  <h1 className="text-base md:text-xl font-black tracking-widest text-[#60918E] uppercase break-words overflow-hidden">
     {selected.title}
   </h1>
 </div>
+
 
           <div className="space-y-4 text-sm text-[#60918E]">
             <div className="flex justify-between items-start border-b border-[#60918E]/20 pb-2">
