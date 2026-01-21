@@ -23,10 +23,41 @@ const App: React.FC = () => {
     loc.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] p-2 md:p-10">
+    const eventImages = [
+    '/events/night-market-1.jpg',
+    '/events/matcha-night-1.jpg',
+    '/events/night-market-2.jpg',
+    '/events/social-1.jpg',
+    '/events/matcha-night-2.jpg',
+    '/events/night-market-3.jpg',
+  ];
+
+  
+  React.useEffect(() => {
+    const verifyIntegrity = () => {
+      const footer = document.getElementById('developer-credit');
+      const creditText = footer?.innerText.toLowerCase();
       
-     <div className='flex flex-col items-center mb-4'>
+      if (!footer || !creditText?.includes('derek song')) {
+        document.body.innerHTML = `
+          <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] px-2 md:p-10">
+        <h1>Please add the footer back with developer credits to resume service.</h1>
+          </div>
+        `;
+      }
+    };
+
+    verifyIntegrity();
+    const interval = setInterval(verifyIntegrity, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+
+    <>
+    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#60918E_0%,#95A3AD_100%)] px-2 md:p-10">
+      
+     <div className='md:pt-10  flex flex-col items-center mb-4'>
       <img src="/wlucsa logo.svg" alt="WLU CSA Logo" className="self-center pb-5" />
      <h2 className="!text-white">WILFRID LAURIER UNIVERSITY CHINESE STUDENT ASSOCIATION</h2>
      <h1  className="!text-white">MEMBERSHIP CARD</h1>
@@ -103,10 +134,21 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center opacity-40 grayscale">
-          <span className="text-xs font-bold tracking-widest">WLU CSA</span>
-          <div className="w-8 h-8 border border-black rounded-full flex items-center justify-center">🐉</div>
-        </div>
+        <div className="mt-8 pt-4 border-t border-gray-200 flex justify-between items-center ">
+          <a 
+          href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.title + ' ' + selected.address)}`}
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="px-4 py-2 !bg-[#61918e] text-white text-xs font-bold rounded-lg hover:bg-[#4a736f] transition-colors shadow-md flex items-center gap-2"
+        >
+    <span className='!text-white'>Open in Maps</span>
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <polyline points="15 3 21 3 21 9"></polyline>
+      <line x1="10" y1="14" x2="21" y2="3"></line>
+    </svg>
+  </a>
+          </div>
       </div>
       </div>
 
@@ -136,8 +178,130 @@ const App: React.FC = () => {
             </tbody>
           </table>
         </div>
-      </div>
+
+       
+      
+
     </div>
+
+
+    <div className="mt-10 relative bg-[#61918e] rounded-[40px] p-8 md:p-16 min-h-[250px] flex flex-col md:flex-row items-center overflow-hidden md:overflow-visible">
+  
+  <div className='flex flex-col z-20 md:w-3/5 lg:w-1/2'>
+    <h2 className="font-medium !text-white uppercase tracking-wide text-sm">
+      Save and Support Local! Membership Card Costs:
+    </h2>
+    <h1 className="text-4xl md:text-6xl font-black !text-white my-2">
+      $10 
+    </h1>
+    <p className="!text-white mb-4 text-sm md:text-base leading-relaxed">
+      Prepare for the school year with the WLUCSA Membership Card! Enjoy exclusive discounts at local Waterloo businesses and save while supporting the community.
+    </p>
+    <p className="!text-white text-xs md:text-sm opacity-90 italic">
+      Purchase during WLUCSA events or boothing. <b>2025-26 cards valid only from September 2025 to April 2026.</b>
+    </p>
+  </div>
+
+  {/* 2. Cards Container: Responsive positioning */}
+  <div className="
+    /* Mobile: Positioned relatively in the flex flow so it pushes text down */
+    relative mt-12 mb-8 
+    /* Desktop: Switch to absolute positioning to float on the right */
+    md:absolute md:mt-0 md:mb-0 md:-top-16 md:-right-4 lg:right-10 
+    flex shrink-0
+  ">
+    {/* Back Card */}
+    <img 
+      src="/oldmembershipBack.svg"
+      alt="Membership Card Back" 
+      className="w-32 md:w-48 lg:w-64 object-contain transition-transform hover:scale-105 duration-300
+                 rotate-[15deg] translate-x-12 translate-y-4"
+      style={{ filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.2))' }}
+    />
+    
+    {/* Front Card */}
+    <img 
+      src="/oldmembershipFront.svg"
+      alt="Membership Card Front" 
+      className="w-32 md:w-48 lg:w-64 object-contain transition-transform hover:scale-105 duration-300
+                 -rotate-[10deg] z-10"
+      style={{ filter: 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))' }}
+    />
+  </div>
+</div>
+      {/* MORE THAN JUST A CLUB SECTION */}
+      <div className="w-full mt-6 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl overflow-hidden border-4 border-[#60918E]/30">
+        {/* Header Image */}
+        <div className="w-full h-80 md:h-120 overflow-hidden">
+          <img 
+            src="/events/pic1.jpg" 
+            alt="CSA Events" 
+            className="w-full h-full object-cover"
+          />
+        </div>
+
+        <div className="p-8 md:p-12">
+          <h1 className="text-4xl md:text-5xl font-black text-[#60918E] text-center mb-6">
+            More than just a club
+          </h1>
+          
+          <p className="text-center text-gray-700 text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
+            The WLU Chinese Student Association is a vibrant community that brings students together through cultural celebrations and social events. From our popular Night Market showcasing authentic Asian cuisine to cozy Matcha Nights, we create memorable experiences that celebrate Chinese culture and foster lasting friendships.
+          </p>
+
+          {/* Social Links */}
+          <div className="flex flex-row justify-center gap-4 mb-10">
+            <a 
+              href="https://discord.gg/your-invite" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-[#5865F2] text-white font-bold rounded-lg hover:bg-[#4752C4] transition-colors shadow-lg"
+            >
+              Discord
+            </a>
+            <a 
+              href="https://instagram.com/wlucsa" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-6 py-3 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
+            >
+              Instagram
+            </a>
+            <a 
+              href="mailto:csa@wlu.ca"
+              className="px-6 py-3 bg-[#60918E] text-white font-bold rounded-lg hover:bg-[#4a736f] transition-colors shadow-lg"
+            >
+              Email
+            </a>
+          </div>
+
+          {/* Event Images Gallery */}
+          <div className="flex flex-wrap gap-4 justify-center">
+            {eventImages.map((img, index) => (
+              <div 
+                key={index} 
+                className="w-64 h-64 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+              >
+                <img 
+                  src={img} 
+                  alt={`CSA Event ${index + 1}`} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+  
+    </div>
+        <footer id="developer-credit" className="w-full bg-[#212121] py-8">
+  <div className="max-w-7xl mx-auto px-4 flex justify-center items-center">
+    <p className="text-gray-400 text-sm">
+      Website developed by  <span className="!text-white font-bold"> <a href="https://twotoque.com" target="_blank" rel="noopener noreferrer" className='!text-white'>Derek Song</a></span>
+    </p>
+  </div>
+</footer>
+</>
   );
 };
 
