@@ -1,5 +1,15 @@
 @import "tailwindcss";
+body {
+  overflow-x: hidden;
+}
 
+html {
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
 .special-gothic-expanded-one-regular {
   font-family: "Special Gothic Expanded One", sans-serif;
   font-weight: 400;

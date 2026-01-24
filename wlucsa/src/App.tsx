@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, { useState, useRef } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { locations } from './locations'; 
@@ -12,9 +12,19 @@ const DefaultIcon = L.icon({
 });
 L.Marker.prototype.options.icon = DefaultIcon;
 
+function MapUpdater({ center }: { center: [number, number] }) {
+  const map = useMap();
+  React.useEffect(() => {
+    map.setView(center, 17, { animate: true });
+  }, [center, map]);
+  return null;
+}
+
+
 const App: React.FC = () => {
   const [selected, setSelected] = useState(locations[0]);
   const [searchTerm, setSearchTerm] = useState('');
+  const markerRefs = useRef<{ [key: string]: L.Marker }>({});
 
   const filteredLocations = locations.filter(loc =>
     loc.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -30,11 +40,27 @@ const App: React.FC = () => {
     '/events/6.jpg',
   ];
 
+    const handleLocationSelect = (loc: typeof locations[0]) => {
+    setSelected(loc);
+    setTimeout(() => {
+      const marker = markerRefs.current[loc.id];
+      if (marker) {
+        marker.openPopup();
+      }
+    }, 500); 
+  };
+
+
   
   return (
 
     <>
-    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#366868_0%,#619190_100%)] px-2 md:p-10">
+    <div className="min-h-screen w-screen flex flex-col bg-[linear-gradient(45deg,#61948b_0%,#376a66_80%,#98bdac_100%)] p-2 md:p-10 relative">
+      <div className="absolute inset-0 opacity-20 pointer-events-none" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        backgroundRepeat: 'repeat',
+        mixBlendMode: 'overlay'
+      }}></div>
 <div className='pt-7 md:pt-10 flex flex-col items-center text-center mb-4 px-4'>
   <img 
     src="/wlucsa logo.svg" 
@@ -63,6 +89,7 @@ const App: React.FC = () => {
           />
         </div>
         <MapContainer center={[43.473, -80.535]} zoom={15} style={{ height: '100%', width: '100%' }}>
+          <MapUpdater center={selected.coordinates} />
           <TileLayer
             attribution='&copy; <a href="https://carto.com/attributions">CartoDB</a>'
             url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png"
@@ -72,6 +99,11 @@ const App: React.FC = () => {
               key={loc.id} 
               position={loc.coordinates}
               eventHandlers={{ click: () => setSelected(loc) }}
+              ref={(ref) => {
+                if (ref) {
+                  markerRefs.current[loc.id] = ref;
+                }
+              }}
             >
               <Popup className="custom-popup">
                 <div className="flex flex-col gap-1 stext-center p-1">
@@ -166,10 +198,10 @@ const App: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {locations.map((loc, index) => (
-                <tr 
+          <tr 
                   key={loc.id} 
                   className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'} hover:bg-[#60918E]/10 cursor-pointer transition-colors`}
-                  onClick={() => setSelected(loc)}
+                  onClick={() => handleLocationSelect(loc)}
                 >
                   <td className="px-4 py-3 text-sm font-semibold text-[#60918E]">{loc.title}</td>
                   <td className="px-4 py-3 text-sm text-gray-700">{loc.address}</td>
@@ -181,8 +213,6 @@ const App: React.FC = () => {
         </div>
 
        
-      
-
     </div>
 
 
@@ -200,7 +230,7 @@ const App: React.FC = () => {
       Prepare for the school year with the WLUCSA Membership Card! Enjoy exclusive discounts at local Waterloo businesses and save while supporting the community.
     </p>
     <p className="!text-white text-xs md:text-sm opacity-90 italic">
-      Purchase during WLUCSA events or boothing. <br/><b>2025-26 cards valid only from September 2025 to April 2026.</b>
+      Purchase during WLUCSA events or boothing. See a printable version <a className="!text-white !font-bold" href="./CSA.pdf">here</a>. In the event of any discrepancy between the website and the printed version, the printed version shall prevail. Refer to terms and conditions of each establishment.<br/><b>2025-26 cards valid only from September 1, 2025 to August 31, 2026.</b>
     </p>
 
   {/* Email Button */}
@@ -257,7 +287,7 @@ const App: React.FC = () => {
           </h1>
           
           <p className="text-center text-gray-700 text-lg md:text-xl max-w-3xl mx-auto mb-8 leading-relaxed">
-            The WLU Chinese Student Association is a vibrant community that brings students together through cultural celebrations and social events. From our popular Night Market showcasing authentic Asian cuisine to cozy Matcha Nights, we create memorable experiences that celebrate Chinese culture and foster lasting friendships.
+            The WLU Chinese Student Association is a vibrant community that brings students together through cultural celebrations and social events. From our popular Night Market showcasing authentic Asian cuisine to cozy social events, we create memorable experiences that celebrate Chinese culture and foster lasting friendships in the Wilfrid Laurier University community.
           </p>
 
           {/* Social Links */}
@@ -267,7 +297,7 @@ const App: React.FC = () => {
 
   {/* Instagram Button */}
   <a 
-    href="https://instagram.com/wlucsa" 
+    href="https://instagram.com/wlu.csa" 
     target="_blank" 
     rel="noopener noreferrer"
     className="flex items-center gap-2 px-6 py-3 bg-[#60918E] text-white font-bold rounded-lg hover:opacity-90 transition-opacity shadow-lg"
@@ -286,21 +316,21 @@ const App: React.FC = () => {
   </a>
 </div>
 
-          {/* Event Images Gallery */}
-          <div className="flex flex-wrap gap-4 justify-center">
-            {eventImages.map((img, index) => (
-              <div 
-                key={index} 
-                className="w-64 h-64 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
-              >
-                <img 
-                  src={img} 
-                  alt={`CSA Event ${index + 1}`} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
+      {/* Event Images Gallery */}
+      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-4 justify-center">
+        {eventImages.map((img, index) => (
+          <div 
+            key={index} 
+            className="w-full md:w-64 h-48 md:h-64 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+          >
+            <img 
+              src={img} 
+              alt={`CSA Event ${index + 1}`} 
+              className="w-full h-full object-cover"
+            />
           </div>
+        ))}
+      </div>
         </div>
       </div>
   
